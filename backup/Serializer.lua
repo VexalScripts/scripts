@@ -1,3 +1,5 @@
+-- this script is not made by vexal scripts / deyvis
+
 local config   = { spaces = 4, highlighting = false };
 local clonef   = clonefunction;
 local str      = string;
