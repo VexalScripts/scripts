@@ -1,6 +1,13 @@
--- script made by bebomods
--- script heavily upgraded by deyvis (Vexal Scripts)
--- added support for potassium users
+--[[
+script originally made by bebomods (https://github.com/NotDSF)
+script heavily upgraded by deyvis (Vexal Scripts)
+   + added support for potassium executor
+   + upgraded UI (scrolling stuff and theme)
+   + upgraded file logging system (can log multiple of files within one roblox instance)
+   - cleaned up alot of junk and bugs
+   + fixed logs not saving to a file
+   + fixed not saving previous logs by HttpSpy
+]]
 
 local options = ({ ... })[1] or {
     AutoDecode = true,
@@ -14,11 +21,11 @@ local options = ({ ... })[1] or {
 }
 local version = "v2 upgraded by deyvis"
 local randomNumber = math.random(10000, 99999)
-local logname = string.format("HttpSpy_%s_%d", os.date("%H%M"), randomNumber)
+local logname = string.format("HttpSpy_%s_%d.txt", os.date("%M%S"), randomNumber)
 
 if options.SaveLogs then
     pcall(function()
-        writefile(logname)
+        writefile(logname, "")
     end)
 end
 
@@ -38,10 +45,8 @@ end
 
 local success, err = pcall(function()
     local clonef = clonefunction
-    local format = clonef(string.format)
     local gsub = clonef(string.gsub)
     local match = clonef(string.match)
-    local append = clonef(appendfile)
     local Type = clonef(type)
     local crunning = clonef(coroutine.running)
     local cwrap = clonef(coroutine.wrap)
@@ -344,7 +349,13 @@ local success, err = pcall(function()
     local function LOG(text, isResponse)
         if options.SaveLogs then
             pcall(function()
-                writefile(logname, gsub(text, "%\27%[%d+m", ""))
+                local cleanText = gsub(text, "%\27%[%d+m", "")
+                if appendfile then
+                    appendfile(logname, cleanText .. "\n")
+                else
+                    local existing = isfile and isfile(logname) and readfile(logname) or ""
+                    writefile(logname, existing .. cleanText .. "\n")
+                end
             end)
         end
         if not options.GuiEnabled then return end
@@ -542,11 +553,8 @@ local success, err = pcall(function()
             end)
         end;
     end;
-    if not debug.info(2, "f") then
-        LOG("You are running an outdated version, please use the loadstring at https://github.com/NotDSF/HttpSpy\n");
-    end;
     task.spawn(function()
-        LOG("HttpSpy " .. version .. " (Created by: https://github.com/NotDSF)\n" ..
+        LOG("HttpSpy " .. version .. "\n" ..
             "Logs are automatically being saved to: " ..
             (options.SaveLogs and logname or "(Log saving is disabled. Enable SaveLogs to save logs)") ..
             "\n\n")
