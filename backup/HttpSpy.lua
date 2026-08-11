@@ -1,6 +1,6 @@
 --[[
 script originally made by bebomods (https://github.com/NotDSF)
-script heavily upgraded by deyvis (Vexal Scripts)
+script heavily upgraded by (Vexal Scripts)
    + added support for potassium executor
    + upgraded UI (scrolling stuff and theme)
    + upgraded file logging system (can log multiple of files within one roblox instance)
@@ -19,7 +19,7 @@ local options = ({ ... })[1] or {
     API = true,
     GuiEnabled = true
 }
-local version = "v2 upgraded by deyvis"
+local version = "v2 upgraded by Vexal Scripts"
 local randomNumber = math.random(10000, 99999)
 local logname = string.format("HttpSpy_%s_%d.txt", os.date("%M%S"), randomNumber)
 
