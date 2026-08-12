@@ -10,6 +10,10 @@ local scripts = {
     ["Duels Murder vs Sheriff Script"] = {
         Endpoint = "DuelsMurderVsSheriff.lua",
         GameId = 7219654364
+    },
+    ["Deagle Arena Script"] = {
+        Endpoint = "DeagleArena.lua",
+        GameId = 10057403337
     }
 }
 
@@ -22,17 +26,13 @@ local function script()
     end
     return nil
 end
-local scriptUrl = script()
-
-local StarterGui = game:GetService("StarterGui")
-local MarketplaceService = game:GetService("MarketplaceService")
 
 local function notify(title, text, duration)
     task.spawn(function()
         local success = false
         while not success do
             success = pcall(function()
-                StarterGui:SetCore("SendNotification", {
+                game:GetService("StarterGui"):SetCore("SendNotification", {
                     Title = title,
                     Text = text,
                     Duration = duration or 5
@@ -43,14 +43,14 @@ local function notify(title, text, duration)
     end)
 end
 
+local scriptUrl = script()
 if scriptUrl then
     local success, placeInfo = pcall(function()
-        return MarketplaceService:GetProductInfo(game.PlaceId)
+        return game:GetService("MarketplaceService"):GetProductInfo(game.PlaceId)
     end)
     local gameName = (success and placeInfo and placeInfo.Name) or "Game"
-
-    notify(gameName, "Welcome to Vexal Scripts! Please wait, your script is loading..", 5)
+    notify(gameName, "Welcome to Vexal Scripts! Please wait, your script is loading..", 10)
     loadstring(game:HttpGet(scriptUrl))()
 else
-    notify("Unsupported Game!", "GameId: " .. tostring(game.GameId) .. " is not supported by Vexal Scripts!", 50)
+    notify("Unsupported Game!", "GameId: " .. tostring(game.GameId) .. " is not supported by Vexal Scripts!", 60)
 end
