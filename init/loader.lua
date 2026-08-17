@@ -17,7 +17,9 @@ local scripts = {
     }
 }
 
+local loaderUrl = "https://raw.githubusercontent.com/VexalScripts/scripts/refs/heads/main/backup/Loader.lua"
 local baseUrl = "https://raw.githubusercontent.com/VexalScripts/scripts/refs/heads/main/"
+
 local function script()
     for scriptName, data in pairs(scripts) do
         if data.GameId == game.GameId then
@@ -26,6 +28,12 @@ local function script()
     end
     return nil
 end
+
+local function run(url)
+    if not url then return end;
+    loadstring(game:HttpGet(url, true))()
+end
+run(loaderUrl);
 
 local function notify(title, text, duration)
     task.spawn(function()
@@ -50,7 +58,7 @@ if scriptUrl then
     end)
     local gameName = (success and placeInfo and placeInfo.Name) or "Game"
     notify(gameName, "Welcome to Vexal Scripts! Please wait, your script is loading..", 10)
-    loadstring(game:HttpGet(scriptUrl))()
+    run(scriptUrl)
 else
     notify("Unsupported Game!", "GameId: " .. tostring(game.GameId) .. " is not supported by Vexal Scripts!", 60)
 end
