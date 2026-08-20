@@ -33,7 +33,9 @@ local function run(url)
     if not url then return end;
     loadstring(game:HttpGet(url, true))()
 end
-run(loaderUrl);
+if not getgenv().dontRunLoader then
+    run(loaderUrl);
+end
 
 local function notify(title, text, duration)
     task.spawn(function()
