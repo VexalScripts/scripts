@@ -17,7 +17,7 @@ local scripts = {
     }
 }
 
-local loaderUrl = "https://raw.githubusercontent.com/VexalScripts/scripts/refs/heads/main/backup/Loader.lua"
+local loaderUrl = "https://raw.githubusercontent.com/VexalScripts/scripts/refs/heads/main/GuiLoader.lua"
 local baseUrl = "https://raw.githubusercontent.com/VexalScripts/scripts/refs/heads/main/"
 
 local function script()
