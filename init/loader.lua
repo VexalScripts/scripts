@@ -23,6 +23,10 @@ local baseUrl = "https://raw.githubusercontent.com/VexalScripts/scripts/refs/hea
 local function script()
     for scriptName, data in pairs(scripts) do
         if data.GameId == game.GameId then
+            -- skip mvsd
+            if game.GameId == 4348829796 then
+                getgenv().dontRunLoader = true
+            end
             return (baseUrl .. data.Endpoint)
         end
     end
