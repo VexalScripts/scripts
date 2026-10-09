@@ -9,6 +9,8 @@ script heavily upgraded by (Vexal Scripts)
    + fixed not saving previous logs by HttpSpy
 ]]
 
+-- MAY BE OUTDATED!!
+
 local options = ({ ... })[1] or {
     AutoDecode = true,
     Highlighting = true,
