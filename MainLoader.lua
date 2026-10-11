@@ -4,7 +4,7 @@ local scripts = {
         GameId = 10209534490
     },
     ["Murder vs Sheriff Duels Script"] = {
-        Endpoint = "MurderVsSheriffDuels.lua",
+        Endpoint = "v2/MvsdLoader.lua",
         GameId = 4348829796
     },
     ["Duels Murder vs Sheriff Script"] = {
